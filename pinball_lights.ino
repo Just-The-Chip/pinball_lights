@@ -1,8 +1,16 @@
-#define PATTERN_COUNT 3
+#include "PiComm.h"
+#include "MessageHandler.h"
+#include "LightGroup.h"
+
+#include "SimpleOnPattern.h"
+#include "OffPattern.h"
+
+PiComm *comm;
+MessageHandler *handler;
 
 void setup() {
-  // put your setup code here, to run once:
-
+  comm = new PiComm();
+  handler = new MessageHandler();
 }
 
 void loop() {

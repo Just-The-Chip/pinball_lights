@@ -9,7 +9,7 @@ class SimpleOnPattern : public Pattern  {
     SimpleOnPattern(uint8_t patternID, ColorList* variants);
     void setVariant(char variantID);
     void setOptions(char options);
-    void updatePixels(Adafruit_NeoPixel* neopixel, LightGroup* group);
+    void updatePixels(Adafruit_NeoPixel* neoPixel, LightGroup* group);
 
   protected:
     uint32_t getCurrentColor();
@@ -17,4 +17,4 @@ class SimpleOnPattern : public Pattern  {
     uint8_t patternID;
     char currentVariantID;
     ColorList* variants;
-}
+};

@@ -1,6 +1,6 @@
 #include "Lists.h"
 
-ColorList::ColorList(uint32_t* colors, uint8_t length) {
+ColorList::ColorList(uint32_t *colors, uint8_t length) {
   colors = colors;
   length = length;
 }
@@ -10,7 +10,7 @@ uint32_t ColorList::getColor(int index) {
     index = length - 1;
   }
 
-  return *(pixelIDs + index);
+  return *(colors + index);
 }
 
 uint8_t ColorList::getLength() {

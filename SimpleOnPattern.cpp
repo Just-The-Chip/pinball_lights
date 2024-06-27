@@ -9,7 +9,7 @@ SimpleOnPattern::SimpleOnPattern(uint8_t patternID, ColorList* variants) {
 }
 
 void SimpleOnPattern::setVariant(char variantID) {
-  uint8_t variantCount = variants.getLength();
+  uint8_t variantCount = variants->getLength();
   if(variantID >= variantCount) {
     variantID = variantID % variantCount;
   }
@@ -22,14 +22,14 @@ void SimpleOnPattern::setOptions(char options) {
 }
 
 uint32_t SimpleOnPattern::getCurrentColor() {
-  return variants.getColor(currentVariantID);
+  return variants->getColor(currentVariantID);
 }
 
-void SimpleOnPattern::updatePixels(Adafruit_NeoPixel* neopixel, LightGroup* group) {
+void SimpleOnPattern::updatePixels(Adafruit_NeoPixel* neoPixel, LightGroup* group) {
   uint8_t length = group->getLength();
 
   for(int i = 0; i < length; i++) {
     uint8_t pixelIDs = group->getPixelID(i);
-    neopixel.setPixelColor(i, getCurrentColor());
+    neoPixel->setPixelColor(i, getCurrentColor());
   }
 }

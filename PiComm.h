@@ -1,7 +1,8 @@
 #pragma once
 #include <stdint.h>
+#include <Adafruit_NeoPixel.h>
 #include "Arduino.h"
-#include "Interfaces.h"
+#include "MessageHandler.h"
 
 #define MESSAGE_TERMINATOR '\n'
 #define MESSAGE_LENGTH 4
@@ -12,10 +13,10 @@ struct PiMessage {
   unsigned char content;
 };
 
-class PiComm : public MessageQueue {
+class PiComm {
   public:
     PiComm();
-    virtual void handleIncomingMessages(MessageHandler* handlers[]);
+    virtual void handleIncomingMessages(Adafruit_NeoPixel *neopixel, MessageHandler *handler);
 
   protected:
     virtual int available();

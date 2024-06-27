@@ -1,12 +1,12 @@
 #include <stdint.h>
 #include "LightGroup.h"
 
-LightGroup::LightGroup(int* pixelIDs, int length) {
+LightGroup::LightGroup(int *pixelIDs, int length) {
   pixelIDs = pixelIDs;
   pixelLength = length;
 }
 
-uint8_t LightGroup::getPixelID(uint8_t index) {
+uint8_t LightGroup::getPixelID(int index) {
   if(index >= pixelLength) {
     index = pixelLength - 1;
   }

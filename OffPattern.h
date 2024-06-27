@@ -6,11 +6,11 @@
 
 class OffPattern : public Pattern  {
   public:
-    OffPattern(char patternID);
+    OffPattern(uint8_t patternID);
     void setVariant(char variantID);
     void setOptions(char options);
-    void updatePixels(Adafruit_NeoPixel* neopixel, LightGroup* group);
+    void updatePixels(Adafruit_NeoPixel *neoPixel, LightGroup *group);
 
   protected:
     char patternID;
-}
+};
