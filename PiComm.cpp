@@ -5,8 +5,7 @@ PiComm::PiComm() {
 }
 
 // expected message format: 
-void PiComm::handleIncomingMessages(Adafruit_NeoPixel *neoPixel, MessageHandler *handler) {
-  uint8_t max_id = HANDLERS_LENGTH;
+void PiComm::handleIncomingMessages(Orchestrator *handler) {
   while(available() > 0) {
     unsigned char message[MESSAGE_LENGTH];
 
@@ -20,7 +19,10 @@ void PiComm::handleIncomingMessages(Adafruit_NeoPixel *neoPixel, MessageHandler 
       lightMessage.variantID = message[2];
       lightMessage.options = message[3];
 
-      handler->handleMessage(neoPixel, lightMessage);
+      Serial.print("PATTERN NEAT: ");
+      Serial.print(lightMessage.patternID);
+
+      handler->handleMessage(lightMessage);
     }
   }
 }

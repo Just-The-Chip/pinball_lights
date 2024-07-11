@@ -6,14 +6,6 @@ OffPattern::OffPattern(uint8_t patternID) {
   patternID = patternID;
 }
 
-void OffPattern::setVariant(char variantID) {
-  // no variants, just off.
-}
-
-void OffPattern::setOptions(char options) {
-  // do nothing
-}
-
 void OffPattern::updatePixels(Adafruit_NeoPixel *neoPixel, LightGroup *group) {
   uint8_t length = group->getLength();
 

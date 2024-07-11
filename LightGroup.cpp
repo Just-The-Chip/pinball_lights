@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include "LightGroup.h"
 
-LightGroup::LightGroup(int *pixelIDs, int length) {
+LightGroup::LightGroup(uint8_t *pixelIDs, uint8_t length) {
   pixelIDs = pixelIDs;
   pixelLength = length;
 }
@@ -18,8 +18,12 @@ uint8_t LightGroup::getLength() {
   return pixelLength;
 }
 
-void LightGroup::setActivePatternID(uint8_t patternID) {
-  patternID = patternID;
+void LightGroup::setActivePatternData(PatternData *data) {
+  patternData = data;
+}
+
+PatternData* LightGroup::getActivePatternData(){
+  return patternData;
 }
 
 void LightGroup::setPatternTimestamp(uint8_t patternID, unsigned long timestamp) {

@@ -2,11 +2,10 @@
 #include <stdint.h>
 #include <Adafruit_NeoPixel.h>
 #include "Arduino.h"
-#include "MessageHandler.h"
+#include "Orchestrator.h"
 
 #define MESSAGE_TERMINATOR '\n'
-#define MESSAGE_LENGTH 4
-#define HANDLERS_LENGTH 15
+#define MESSAGE_LENGTH 5
 
 struct PiMessage {
   uint8_t id;
@@ -16,7 +15,7 @@ struct PiMessage {
 class PiComm {
   public:
     PiComm();
-    virtual void handleIncomingMessages(Adafruit_NeoPixel *neopixel, MessageHandler *handler);
+    virtual void handleIncomingMessages(Orchestrator *handler);
 
   protected:
     virtual int available();

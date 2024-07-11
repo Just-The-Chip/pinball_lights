@@ -11,12 +11,13 @@ struct LightMessage {
   unsigned char options;
 };
 
-class MessageHandler {
+class Orchestrator {
   public:
-    MessageHandler();
+    Orchestrator();
     virtual void registerLightGroup(uint8_t lightGroupID, LightGroup *lightGroup);
     virtual void registerPattern(uint8_t patternID, Pattern *pattern);
-    virtual void handleMessage(Adafruit_NeoPixel *neoPixel, LightMessage message);
+    virtual void handleMessage(LightMessage message);
+    virtual void updateLightGroups(Adafruit_NeoPixel *neoPixel);
 
   protected:
     LightGroup* lightGroups[LIGHT_GROUP_COUNT];

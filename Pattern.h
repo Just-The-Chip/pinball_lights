@@ -5,8 +5,5 @@
 
 class Pattern {
   public:
-    virtual void setVariant(char variantID) = 0;
-    virtual void setOptions(char options) = 0;
     virtual void updatePixels(Adafruit_NeoPixel* neopixel, LightGroup* lightGroup) = 0;
-    virtual void setTimestamp(LightGroup* lightGroup) = 0;
 };
