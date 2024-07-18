@@ -1,3 +1,4 @@
+#include "HardwareSerial.h"
 #include "PiComm.h"
 
 PiComm::PiComm() {
@@ -9,24 +10,35 @@ void PiComm::handleIncomingMessages(Orchestrator *handler) {
   while(available() > 0) {
     unsigned char message[MESSAGE_LENGTH];
 
-    Serial.readBytes(message, MESSAGE_LENGTH);
+    int bytesRead = Serial.readBytesUntil(MESSAGE_TERMINATOR, message, MESSAGE_LENGTH);
 
-    if(message[MESSAGE_LENGTH - 1] == MESSAGE_TERMINATOR) {
+    if(bytesRead == 4) {
       LightMessage lightMessage;
 
-      lightMessage.lightGroupID = uint8_t(message[0]);
-      lightMessage.patternID = uint8_t(message[1]);
+      lightMessage.lightGroupID = message[0];
+      lightMessage.patternID = message[1];
       lightMessage.variantID = message[2];
       lightMessage.options = message[3];
 
-      Serial.print("PATTERN NEAT: ");
-      Serial.print(lightMessage.patternID);
+      // Serial.print("VARIANT NEAT: ");
+      // Serial.print(lightMessage.variantID);
 
       handler->handleMessage(lightMessage);
+    } else {
+      Serial.print("BYTES READ: ");
+      Serial.print(bytesRead);
+      Serial.println(" INVALID MESSAGE OH NOES!");
     }
   }
 }
 
 int PiComm::available() {
+  // int available =  Serial.available();
+
+  // if(available > 0 && available < MESSAGE_LENGTH) {
+  //   Serial.print("MESSAGE LENGTH: ");
+  //   Serial.print(available);
+  //   Serial.println(".... done");
+  // }
   return Serial.available() / MESSAGE_LENGTH;
 }

@@ -6,7 +6,7 @@
 
 class SimpleOnPattern : public Pattern  {
   public:
-    SimpleOnPattern(uint8_t patternID, ColorList* variants);
+    SimpleOnPattern(uint8_t id, ColorList* variantsList);
     virtual void updatePixels(Adafruit_NeoPixel* neoPixel, LightGroup* group);
 
   protected:

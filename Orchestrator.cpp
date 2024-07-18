@@ -2,7 +2,7 @@
 
 Orchestrator::Orchestrator() {}
 
-void Orchestrator::registerLightGroup(uint8_t lightGroupID, LightGroup *lightGroup) {
+void Orchestrator::registerLightGroup(unsigned char lightGroupID, LightGroup *lightGroup) {
   if(lightGroupID >= LIGHT_GROUP_COUNT) {
     return;
   }
@@ -10,7 +10,7 @@ void Orchestrator::registerLightGroup(uint8_t lightGroupID, LightGroup *lightGro
   lightGroups[lightGroupID] = lightGroup;
 }
 
-void Orchestrator::registerPattern(uint8_t patternID, Pattern *pattern) {
+void Orchestrator::registerPattern(unsigned char patternID, Pattern *pattern) {
   if(patternID >= PATTERN_COUNT) {
     return;
   }
@@ -26,46 +26,45 @@ void Orchestrator::handleMessage(LightMessage message) {
     return;
   }
 
-  PatternData *current = group->getActivePatternData();
+  // TODO: see if you can avoid pointers here
+  PatternData current = group->getActivePatternData();
 
-  if(current->patternID != message.patternID || current->variantID != message.variantID 
-      || current->options != message.options) {
+  if(current.patternID != message.patternID || current.variantID != message.variantID 
+      || current.options != message.options) {
 
-    // Serial.println("Pattern ID: " + current->patternID);
-    // Serial.println();
-
-    PatternData *patternData = new PatternData;
-    patternData->patternID = message.patternID;
-    patternData->variantID = message.variantID;
-    patternData->options = message.options;
-
-    // pattern ID is picked up correctly up to this point
-    Serial.print("Pattern ID: ");
-    Serial.print(patternData->patternID);
-    Serial.println("....done.");
+    PatternData patternData;
+    patternData.patternID = message.patternID;
+    patternData.variantID = message.variantID;
+    patternData.options = message.options;
 
 
-    // something bad happens here though. maybe. investigate here. 
+    // something bad happens past here though. maybe. investigate here. 
     // also only use println once. 
     group->setPatternTimestamp(message.patternID, 0);
+
+    // TODO: see if you can avoid pointers here
     group->setActivePatternData(patternData);
+
+    // // pattern ID is picked up correctly up to this point
+    // Serial.print("variant ID: ");
+    // Serial.print(patternData.variantID);
+    // Serial.println("....done.");
   }
 }
 
 void Orchestrator::updateLightGroups(Adafruit_NeoPixel *neoPixel) {
   for(int i = 0; i < LIGHT_GROUP_COUNT; i++) {
     LightGroup *group = getLightGroup(i);
-    PatternData *patternData = group->getActivePatternData();
-    Pattern *pattern = patternData != NULL ? getPattern(patternData->patternID): NULL;
+    PatternData patternData = group->getActivePatternData();
+    Pattern *pattern = getPattern(patternData.patternID);
 
     if (group != NULL && pattern != NULL) {
-      // Serial.println("Pattern ID: " + patternData->patternID);
       pattern->updatePixels(neoPixel, group);
     }
   }
 }
 
-LightGroup* Orchestrator::getLightGroup(uint8_t lightGroupID) {
+LightGroup* Orchestrator::getLightGroup(unsigned char lightGroupID) {
   if(lightGroupID >= LIGHT_GROUP_COUNT) {
     return NULL;
   }
@@ -73,7 +72,7 @@ LightGroup* Orchestrator::getLightGroup(uint8_t lightGroupID) {
   return lightGroups[lightGroupID];
 }
 
-Pattern* Orchestrator::getPattern(uint8_t patternID) {
+Pattern* Orchestrator::getPattern(unsigned char patternID) {
   if(patternID >= PATTERN_COUNT) {
     return NULL;
   }

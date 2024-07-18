@@ -8,6 +8,6 @@ class ColorList {
     virtual uint8_t getLength();
 
   protected: 
-    uint32_t *colors;
-    uint8_t length;
+    uint32_t *colorList;
+    uint8_t colorLength;
 };

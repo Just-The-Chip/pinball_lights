@@ -6,9 +6,9 @@
 
 class OffPattern : public Pattern  {
   public:
-    OffPattern(uint8_t patternID);
+    OffPattern(unsigned char id);
     virtual void updatePixels(Adafruit_NeoPixel *neoPixel, LightGroup *group);
 
   protected:
-    uint8_t patternID;
+    unsigned char patternID;
 };

@@ -5,8 +5,8 @@
 #include "Pattern.h"
 
 struct LightMessage {
-  uint8_t lightGroupID;
-  uint8_t patternID;
+  unsigned char lightGroupID;
+  unsigned char patternID;
   unsigned char variantID;
   unsigned char options;
 };
@@ -14,8 +14,8 @@ struct LightMessage {
 class Orchestrator {
   public:
     Orchestrator();
-    virtual void registerLightGroup(uint8_t lightGroupID, LightGroup *lightGroup);
-    virtual void registerPattern(uint8_t patternID, Pattern *pattern);
+    virtual void registerLightGroup(unsigned char lightGroupID, LightGroup *lightGroup);
+    virtual void registerPattern(unsigned char patternID, Pattern *pattern);
     virtual void handleMessage(LightMessage message);
     virtual void updateLightGroups(Adafruit_NeoPixel *neoPixel);
 
@@ -23,6 +23,6 @@ class Orchestrator {
     LightGroup* lightGroups[LIGHT_GROUP_COUNT];
     Pattern* patterns[PATTERN_COUNT];
 
-    virtual LightGroup* getLightGroup(uint8_t lightGroupID);
-    virtual Pattern* getPattern(uint8_t patternID);
+    virtual LightGroup* getLightGroup(unsigned char lightGroupID);
+    virtual Pattern* getPattern(unsigned char patternID);
 };

@@ -1,18 +1,18 @@
 #include "Lists.h"
 
 ColorList::ColorList(uint32_t *colors, uint8_t length) {
-  colors = colors;
-  length = length;
+  colorList = colors;
+  colorLength = length;
 }
 
 uint32_t ColorList::getColor(int index) {
-  if(index >= length) {
-    index = length - 1;
+  if(index >= colorLength) {
+    index = colorLength - 1;
   }
 
-  return *(colors + index);
+  return *(colorList + index);
 }
 
 uint8_t ColorList::getLength() {
-  return length;
+  return colorLength;
 }

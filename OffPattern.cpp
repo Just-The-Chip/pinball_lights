@@ -2,8 +2,8 @@
 #include "OffPattern.h"
 #include <Adafruit_NeoPixel.h>
 
-OffPattern::OffPattern(uint8_t patternID) {
-  patternID = patternID;
+OffPattern::OffPattern(uint8_t id) {
+  patternID = id;
 }
 
 void OffPattern::updatePixels(Adafruit_NeoPixel *neoPixel, LightGroup *group) {
