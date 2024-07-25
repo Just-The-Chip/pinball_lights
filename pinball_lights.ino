@@ -23,6 +23,11 @@ static uint32_t onPatColors[4];
 SimpleOnPattern *onPat;
 ColorList *onPatVariants;
 
+static uint32_t specialOnPatColors[4];
+SimpleOnPattern *specialOnPat;
+ColorList *specialOnPatVariants;
+
+
 static uint8_t allPixels[TOTAL_PIXELS];
 LightGroup *allLights;
 
@@ -57,6 +62,14 @@ void setup() {
   onPatVariants = new ColorList(onPatColors, 4);
   onPat = new SimpleOnPattern(1, onPatVariants);
   handler->registerPattern(1, onPat);
+
+  specialOnPatColors[0] = pixel->Color(255, 0, 255);
+  specialOnPatColors[1] = pixel->Color(255, 255, 0);
+  specialOnPatColors[2] = pixel->Color(0, 255, 255);
+  specialOnPatColors[3] = pixel->Color(128, 0, 255);
+  specialOnPatVariants = new ColorList(specialOnPatColors, 4);
+  specialOnPat = new SimpleOnPattern(2, specialOnPatVariants);
+  handler->registerPattern(2, specialOnPat);
 
   PatternData defaultPattern;
   defaultPattern.patternID = 0;
@@ -96,7 +109,7 @@ void setup() {
   slingRPixels[1] = 4;
   slingshotR = new LightGroup(slingRPixels, 2);
   handler->registerLightGroup(5, slingshotR);
-  slingshotL->setActivePatternData(defaultPattern);
+  slingshotR->setActivePatternData(defaultPattern);
 
   pixel->begin();
   // pixel->clear();

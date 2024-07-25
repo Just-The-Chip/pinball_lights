@@ -43,7 +43,7 @@ void Orchestrator::handleMessage(LightMessage message) {
 
     group->setActivePatternData(patternData);
 
-    // only use println once.
+    // //only use println once.
     // Serial.print("variant ID: ");
     // Serial.print(patternData.variantID);
     // Serial.println("....done.");
