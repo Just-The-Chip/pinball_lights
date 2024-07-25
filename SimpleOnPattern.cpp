@@ -25,6 +25,7 @@ void SimpleOnPattern::updatePixels(Adafruit_NeoPixel* neoPixel, LightGroup* grou
   uint32_t color = getVariantColor(data.variantID);
 
   for(int i = 0; i < length; i++) {
+    // TODO: only set each pixel once per setting the pattern like with the Off pattern
     uint8_t pixelID = group->getPixelID(i);
     neoPixel->setPixelColor(pixelID, color);
   }

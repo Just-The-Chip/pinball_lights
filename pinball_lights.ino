@@ -19,27 +19,27 @@ Adafruit_NeoPixel *pixel;
 
 OffPattern *offPat;
 
-uint32_t onPatColors[4];
+static uint32_t onPatColors[4];
 SimpleOnPattern *onPat;
 ColorList *onPatVariants;
 
-uint8_t allPixels[TOTAL_PIXELS];
+static uint8_t allPixels[TOTAL_PIXELS];
 LightGroup *allLights;
 
-uint8_t pop1Pixels[1];
+static uint8_t pop1Pixels[1];
 LightGroup *pop1;
 
-uint8_t pop2Pixels[1];
+static uint8_t pop2Pixels[1];
 LightGroup *pop2;
 
-uint8_t pop3Pixels[1];
+static uint8_t pop3Pixels[1];
 LightGroup *pop3;
 
-// uint8_t slingLPixels[2];
-// LightGroup *slingshotL;
+static uint8_t slingLPixels[2];
+LightGroup *slingshotL;
 
-// uint8_t slingRPixels[2];
-// LightGroup *slingshotR;
+static uint8_t slingRPixels[2];
+LightGroup *slingshotR;
 
 void setup() {
   pixel = new Adafruit_NeoPixel(TOTAL_PIXELS, NEOPIXEL_PIN, NEO_GRB + NEO_KHZ800);
@@ -86,20 +86,22 @@ void setup() {
   handler->registerLightGroup(3, pop3);
   pop3->setActivePatternData(defaultPattern);
 
-  // slingLPixels[0] = 3;
-  // slingLPixels[1] = 4;
-  // slingshotL = new LightGroup(slingLPixels, 2);
-  // handler->registerLightGroup(4, slingshotL);
-  // slingshotL->setActivePatternData(defaultPattern);
+  slingLPixels[0] = 5;
+  slingLPixels[1] = 6;
+  slingshotL = new LightGroup(slingLPixels, 2);
+  handler->registerLightGroup(4, slingshotL);
+  slingshotL->setActivePatternData(defaultPattern);
 
-  // slingRPixels[0] = 5;
-  // slingRPixels[1] = 6;
-  // slingshotR = new LightGroup(slingRPixels, 2);
-  // handler->registerLightGroup(5, slingshotR);
+  slingRPixels[0] = 3;
+  slingRPixels[1] = 4;
+  slingshotR = new LightGroup(slingRPixels, 2);
+  handler->registerLightGroup(5, slingshotR);
+  slingshotL->setActivePatternData(defaultPattern);
 
   pixel->begin();
   // pixel->clear();
 
+  // this is, like, a sanity check or something
   for(uint8_t i = 0; i < TOTAL_PIXELS; i++) {
     pixel->setPixelColor(i, pixel->Color(255, 255, 0));
     pixel->show();

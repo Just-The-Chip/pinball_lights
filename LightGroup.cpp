@@ -4,6 +4,10 @@
 LightGroup::LightGroup(uint8_t *ids, uint8_t length) {
   pixelIDs = ids;
   pixelLength = length;
+
+  for(int i = 0; i < PATTERN_COUNT; i++) {
+    patternTimestamps[0] = 0;
+  }
 }
 
 uint8_t LightGroup::getPixelID(int index) {

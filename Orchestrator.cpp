@@ -3,6 +3,9 @@
 Orchestrator::Orchestrator() {}
 
 void Orchestrator::registerLightGroup(unsigned char lightGroupID, LightGroup *lightGroup) {
+  // NOTE: if the pattern sets a light group's pixels on every single frame, it has the potential to 
+  // overwrite a pixel if that pixel belongs to more than one group. Patterns should be mindfu of this
+  // but if it becomes an continuous issue I might have to implement some sort of priority system. 
   if(lightGroupID >= LIGHT_GROUP_COUNT) {
     return;
   }
@@ -26,7 +29,6 @@ void Orchestrator::handleMessage(LightMessage message) {
     return;
   }
 
-  // TODO: see if you can avoid pointers here
   PatternData current = group->getActivePatternData();
 
   if(current.patternID != message.patternID || current.variantID != message.variantID 
@@ -36,16 +38,12 @@ void Orchestrator::handleMessage(LightMessage message) {
     patternData.patternID = message.patternID;
     patternData.variantID = message.variantID;
     patternData.options = message.options;
-
-
-    // something bad happens past here though. maybe. investigate here. 
-    // also only use println once. 
+ 
     group->setPatternTimestamp(message.patternID, 0);
 
-    // TODO: see if you can avoid pointers here
     group->setActivePatternData(patternData);
 
-    // // pattern ID is picked up correctly up to this point
+    // only use println once.
     // Serial.print("variant ID: ");
     // Serial.print(patternData.variantID);
     // Serial.println("....done.");
