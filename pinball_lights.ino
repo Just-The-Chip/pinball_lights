@@ -8,7 +8,7 @@
 #include "OffPattern.h"
 
 #define FRAME_INTERVAL 1000 / 30
-#define TOTAL_PIXELS 16
+#define TOTAL_PIXELS 20
 #define NEOPIXEL_PIN 6
 
 unsigned long lastFrameTime;
@@ -45,6 +45,18 @@ LightGroup *slingshotL;
 
 static uint8_t slingRPixels[2];
 LightGroup *slingshotR;
+
+static uint8_t magSwitch1Pixels[1];
+LightGroup *magSwitch1;
+
+static uint8_t magSwitch2Pixels[1];
+LightGroup *magSwitch2;
+
+static uint8_t magSwitch3Pixels[1];
+LightGroup *magSwitch3;
+
+static uint8_t magSwitch4Pixels[1];
+LightGroup *magSwitch4;
 
 void setup() {
   pixel = new Adafruit_NeoPixel(TOTAL_PIXELS, NEOPIXEL_PIN, NEO_GRB + NEO_KHZ800);
@@ -110,6 +122,26 @@ void setup() {
   slingshotR = new LightGroup(slingRPixels, 2);
   handler->registerLightGroup(5, slingshotR);
   slingshotR->setActivePatternData(defaultPattern);
+
+  magSwitch1Pixels[0] = 16;
+  magSwitch1 = new LightGroup(magSwitch1Pixels,1);
+  handler->registerLightGroup(6,magSwitch1);
+  magSwitch1->setActivePatternData(defaultPattern);
+
+  magSwitch2Pixels[0] = 17;
+  magSwitch2 = new LightGroup(magSwitch2Pixels,1);
+  handler->registerLightGroup(7,magSwitch2);
+  magSwitch2->setActivePatternData(defaultPattern);
+
+  magSwitch3Pixels[0] = 18;
+  magSwitch3 = new LightGroup(magSwitch3Pixels,1);
+  handler->registerLightGroup(8,magSwitch3);
+  magSwitch3->setActivePatternData(defaultPattern);
+
+  magSwitch4Pixels[0] = 19;
+  magSwitch4 = new LightGroup(magSwitch4Pixels,1);
+  handler->registerLightGroup(9,magSwitch4);
+  magSwitch4->setActivePatternData(defaultPattern);
 
   pixel->begin();
   // pixel->clear();
