@@ -58,6 +58,9 @@ LightGroup *magSwitch3;
 static uint8_t magSwitch4Pixels[1];
 LightGroup *magSwitch4;
 
+static uint8_t magBallCatchPixels[2];
+LightGroup *magBallCatch;
+
 void setup() {
   pixel = new Adafruit_NeoPixel(TOTAL_PIXELS, NEOPIXEL_PIN, NEO_GRB + NEO_KHZ800);
   comm = new PiComm();
@@ -124,24 +127,32 @@ void setup() {
   slingshotR->setActivePatternData(defaultPattern);
 
   magSwitch1Pixels[0] = 16;
-  magSwitch1 = new LightGroup(magSwitch1Pixels,1);
-  handler->registerLightGroup(6,magSwitch1);
+  magSwitch1 = new LightGroup(magSwitch1Pixels, 1);
+  handler->registerLightGroup(6, magSwitch1);
   magSwitch1->setActivePatternData(defaultPattern);
 
   magSwitch2Pixels[0] = 17;
-  magSwitch2 = new LightGroup(magSwitch2Pixels,1);
-  handler->registerLightGroup(7,magSwitch2);
+  magSwitch2 = new LightGroup(magSwitch2Pixels, 1);
+  handler->registerLightGroup(7, magSwitch2);
   magSwitch2->setActivePatternData(defaultPattern);
 
   magSwitch3Pixels[0] = 18;
-  magSwitch3 = new LightGroup(magSwitch3Pixels,1);
-  handler->registerLightGroup(8,magSwitch3);
+  magSwitch3 = new LightGroup(magSwitch3Pixels, 1);
+  handler->registerLightGroup(8, magSwitch3);
   magSwitch3->setActivePatternData(defaultPattern);
 
   magSwitch4Pixels[0] = 19;
-  magSwitch4 = new LightGroup(magSwitch4Pixels,1);
-  handler->registerLightGroup(9,magSwitch4);
+  magSwitch4 = new LightGroup(magSwitch4Pixels, 1);
+  handler->registerLightGroup(9, magSwitch4);
   magSwitch4->setActivePatternData(defaultPattern);
+
+  handler->registerLightGroup(10, NULL); // 10 represents \n so we gotta skip it
+
+  magBallCatchPixels[0] = 14;
+  magBallCatchPixels[1] = 15;
+  magBallCatch = new LightGroup(magBallCatchPixels, 2);
+  handler->registerLightGroup(11, magBallCatch);
+  magBallCatch->setActivePatternData(defaultPattern);
 
   pixel->begin();
   // pixel->clear();

@@ -38,6 +38,10 @@ void Orchestrator::handleMessage(LightMessage message) {
     patternData.patternID = message.patternID;
     patternData.variantID = message.variantID;
     patternData.options = message.options;
+
+    // if(message.patternID == 0 && message.lightGroupID == 11) {
+    //   patternData.logPattern = true;
+    // }
  
     group->setPatternTimestamp(message.patternID, 0);
 
@@ -53,11 +57,14 @@ void Orchestrator::handleMessage(LightMessage message) {
 void Orchestrator::updateLightGroups(Adafruit_NeoPixel *neoPixel) {
   for(int i = 0; i < LIGHT_GROUP_COUNT; i++) {
     LightGroup *group = getLightGroup(i);
-    PatternData patternData = group->getActivePatternData();
-    Pattern *pattern = getPattern(patternData.patternID);
 
-    if (group != NULL && pattern != NULL) {
-      pattern->updatePixels(neoPixel, group);
+    if (group != NULL) {
+      PatternData patternData = group->getActivePatternData();
+      Pattern *pattern = getPattern(patternData.patternID);
+
+      if (pattern != NULL) {
+        pattern->updatePixels(neoPixel, group);
+      }
     }
   }
 }

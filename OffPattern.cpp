@@ -15,8 +15,8 @@ void OffPattern::updatePixels(Adafruit_NeoPixel *neoPixel, LightGroup *group) {
     uint8_t length = group->getLength();
 
     for(int i = 0; i < length; i++) {
-      uint8_t pixelIDs = group->getPixelID(i);
-      neoPixel->setPixelColor(i, 0);
+      uint8_t pixelID = group->getPixelID(i);
+      neoPixel->setPixelColor(pixelID, 0);
     }
 
     group->setPatternTimestamp(patternID, millis());

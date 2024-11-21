@@ -2,12 +2,14 @@
 #pragma once
 
 #define PATTERN_COUNT 3
-#define LIGHT_GROUP_COUNT 10
+#define LIGHT_GROUP_COUNT 12
 
 struct PatternData {
   unsigned char patternID;
   unsigned char variantID;
   unsigned char options;
+  bool logPattern;
+  PatternData(): logPattern(false) {}
 };
 
 class LightGroup {
