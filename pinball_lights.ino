@@ -8,7 +8,7 @@
 #include "OffPattern.h"
 
 #define FRAME_INTERVAL 1000 / 30
-#define TOTAL_PIXELS 20
+#define TOTAL_PIXELS 24
 #define NEOPIXEL_PIN 6
 
 unsigned long lastFrameTime;
@@ -23,7 +23,7 @@ static uint32_t onPatColors[4];
 SimpleOnPattern *onPat;
 ColorList *onPatVariants;
 
-static uint32_t specialOnPatColors[4];
+static uint32_t specialOnPatColors[5];
 SimpleOnPattern *specialOnPat;
 ColorList *specialOnPatVariants;
 
@@ -61,6 +61,18 @@ LightGroup *magSwitch4;
 static uint8_t magBallCatchPixels[2];
 LightGroup *magBallCatch;
 
+static uint8_t plinkoLane1Pixels[1];
+LightGroup *plinkoLane1;
+
+static uint8_t plinkoLane2Pixels[1];
+LightGroup *plinkoLane2;
+
+static uint8_t plinkoLane3Pixels[1];
+LightGroup *plinkoLane3;
+
+static uint8_t plinkoLane4Pixels[1];
+LightGroup *plinkoLane4;
+
 void setup() {
   pixel = new Adafruit_NeoPixel(TOTAL_PIXELS, NEOPIXEL_PIN, NEO_GRB + NEO_KHZ800);
   comm = new PiComm();
@@ -78,11 +90,12 @@ void setup() {
   onPat = new SimpleOnPattern(1, onPatVariants);
   handler->registerPattern(1, onPat);
 
-  specialOnPatColors[0] = pixel->Color(255, 0, 255);
+  specialOnPatColors[0] = pixel->Color(255, 0, 128);
   specialOnPatColors[1] = pixel->Color(255, 255, 0);
   specialOnPatColors[2] = pixel->Color(0, 255, 255);
   specialOnPatColors[3] = pixel->Color(128, 0, 255);
-  specialOnPatVariants = new ColorList(specialOnPatColors, 4);
+  specialOnPatColors[4] = pixel->Color(255, 64, 0);
+  specialOnPatVariants = new ColorList(specialOnPatColors, 5);
   specialOnPat = new SimpleOnPattern(2, specialOnPatVariants);
   handler->registerPattern(2, specialOnPat);
 
@@ -153,6 +166,26 @@ void setup() {
   magBallCatch = new LightGroup(magBallCatchPixels, 2);
   handler->registerLightGroup(11, magBallCatch);
   magBallCatch->setActivePatternData(defaultPattern);
+
+  plinkoLane1Pixels[0] = 20;
+  plinkoLane1 = new LightGroup(plinkoLane1Pixels, 1);
+  handler->registerLightGroup(12, plinkoLane1);
+  plinkoLane1->setActivePatternData(defaultPattern);
+
+  plinkoLane2Pixels[0] = 21;
+  plinkoLane2 = new LightGroup(plinkoLane2Pixels, 1);
+  handler->registerLightGroup(13, plinkoLane2);
+  plinkoLane2->setActivePatternData(defaultPattern);
+
+  plinkoLane3Pixels[0] = 22;
+  plinkoLane3 = new LightGroup(plinkoLane3Pixels, 1);
+  handler->registerLightGroup(14, plinkoLane3);
+  plinkoLane3->setActivePatternData(defaultPattern);
+
+  plinkoLane4Pixels[0] = 23;
+  plinkoLane4 = new LightGroup(plinkoLane4Pixels, 1);
+  handler->registerLightGroup(15, plinkoLane4);
+  plinkoLane4->setActivePatternData(defaultPattern);
 
   pixel->begin();
   // pixel->clear();

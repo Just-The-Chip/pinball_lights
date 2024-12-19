@@ -2,7 +2,7 @@
 #pragma once
 
 #define PATTERN_COUNT 3
-#define LIGHT_GROUP_COUNT 12
+#define LIGHT_GROUP_COUNT 16
 
 struct PatternData {
   unsigned char patternID;
