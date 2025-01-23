@@ -6,9 +6,10 @@
 
 #include "SimpleOnPattern.h"
 #include "OffPattern.h"
+#include "FlashPattern.h"
 
 #define FRAME_INTERVAL 1000 / 30
-#define TOTAL_PIXELS 24
+#define TOTAL_PIXELS 28
 #define NEOPIXEL_PIN 6
 
 unsigned long lastFrameTime;
@@ -26,6 +27,8 @@ ColorList *onPatVariants;
 static uint32_t specialOnPatColors[5];
 SimpleOnPattern *specialOnPat;
 ColorList *specialOnPatVariants;
+
+FlashPattern *flashPat;
 
 
 static uint8_t allPixels[TOTAL_PIXELS];
@@ -73,6 +76,19 @@ LightGroup *plinkoLane3;
 static uint8_t plinkoLane4Pixels[1];
 LightGroup *plinkoLane4;
 
+static uint8_t leftWallTarget1Pixels[1];
+LightGroup *leftWallTarget1;
+
+static uint8_t leftWallTarget2Pixels[1];
+LightGroup *leftWallTarget2;
+
+static uint8_t leftWallTarget3Pixels[1];
+LightGroup *leftWallTarget3;
+
+static uint8_t leftWallTarget4Pixels[1];
+LightGroup *leftWallTarget4;
+
+
 void setup() {
   pixel = new Adafruit_NeoPixel(TOTAL_PIXELS, NEOPIXEL_PIN, NEO_GRB + NEO_KHZ800);
   comm = new PiComm();
@@ -98,6 +114,9 @@ void setup() {
   specialOnPatVariants = new ColorList(specialOnPatColors, 5);
   specialOnPat = new SimpleOnPattern(2, specialOnPatVariants);
   handler->registerPattern(2, specialOnPat);
+
+  flashPat = new FlashPattern(3, 100, onPatVariants);
+  handler->registerPattern(3, flashPat);
 
   PatternData defaultPattern;
   defaultPattern.patternID = 0;
@@ -186,6 +205,26 @@ void setup() {
   plinkoLane4 = new LightGroup(plinkoLane4Pixels, 1);
   handler->registerLightGroup(15, plinkoLane4);
   plinkoLane4->setActivePatternData(defaultPattern);
+
+  leftWallTarget1Pixels[0] = 24;
+  leftWallTarget1 = new LightGroup(leftWallTarget1Pixels, 1);
+  handler->registerLightGroup(16, leftWallTarget1);
+  leftWallTarget1->setActivePatternData(defaultPattern);
+
+  leftWallTarget2Pixels[0] = 25;
+  leftWallTarget2 = new LightGroup(leftWallTarget2Pixels, 1);
+  handler->registerLightGroup(17, leftWallTarget2);
+  leftWallTarget2->setActivePatternData(defaultPattern);
+
+  leftWallTarget3Pixels[0] = 26;
+  leftWallTarget3 = new LightGroup(leftWallTarget3Pixels, 1);
+  handler->registerLightGroup(18, leftWallTarget3);
+  leftWallTarget3->setActivePatternData(defaultPattern);
+
+  leftWallTarget4Pixels[0] = 27;
+  leftWallTarget4 = new LightGroup(leftWallTarget4Pixels, 1);
+  handler->registerLightGroup(19, leftWallTarget4);
+  leftWallTarget4->setActivePatternData(defaultPattern);
 
   pixel->begin();
   // pixel->clear();
