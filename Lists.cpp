@@ -1,18 +1,30 @@
 #include "Lists.h"
 
-ColorList::ColorList(uint32_t *colors, uint8_t length) {
-  colorList = colors;
-  colorLength = length;
+BaseList::BaseList(uint8_t length) {
+  listLength = length;
 }
 
-uint32_t ColorList::getColor(int index) {
-  if(index >= colorLength) {
-    index = colorLength - 1;
+uint8_t BaseList::getLength() {
+  return listLength;
+}
+
+uint8_t BaseList::sanitizedIndex(uint8_t index) {
+  uint8_t listLength = getLength();
+
+  if(index >= listLength) {
+    return listLength - 1;
   }
 
-  return *(colorList + index);
+  return index;
 }
 
-uint8_t ColorList::getLength() {
-  return colorLength;
+ColorList::ColorList(uint32_t *colors, uint8_t length)
+: BaseList(length) {
+  colorList = colors;
+}
+
+uint32_t ColorList::getColor(uint8_t index) {
+  index = sanitizedIndex(index);
+
+  return *(colorList + index);
 }

@@ -1,8 +1,8 @@
 #include <stdint.h>
 #pragma once
 
-#define PATTERN_COUNT 4
-#define LIGHT_GROUP_COUNT 20
+#define PATTERN_COUNT 5
+#define LIGHT_GROUP_COUNT 21
 
 struct PatternData {
   unsigned char patternID;
