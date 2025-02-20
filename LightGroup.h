@@ -1,7 +1,7 @@
 #include <stdint.h>
 #pragma once
 
-#define PATTERN_COUNT 5
+#define PATTERN_COUNT 6
 #define LIGHT_GROUP_COUNT 21
 
 struct PatternData {

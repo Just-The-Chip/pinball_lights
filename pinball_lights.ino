@@ -30,6 +30,7 @@ SimpleOnPattern *specialOnPat;
 ColorList *specialOnPatVariants;
 
 FlashPattern *flashPat;
+FlashPattern *grbFlashPat;
 
 static uint32_t grbRainbowColors[7];
 MeterPattern *sliderPattern;
@@ -134,8 +135,12 @@ void setup() {
   grbRainbowColors[5] = pixel->Color(0, 0, 255);
   grbRainbowColors[6] = pixel->Color(0, 128, 255);
   grbRainbowColorList = new ColorList(grbRainbowColors, 7);
-  sliderPattern = new MeterPattern(4, grbRainbowColorList);
-  handler->registerPattern(4, sliderPattern);
+
+  grbFlashPat = new FlashPattern(4, 100, grbRainbowColorList);
+  handler->registerPattern(4, grbFlashPat);
+
+  sliderPattern = new MeterPattern(5, grbRainbowColorList);
+  handler->registerPattern(5, sliderPattern);
 
   PatternData defaultPattern;
   defaultPattern.patternID = 0;
