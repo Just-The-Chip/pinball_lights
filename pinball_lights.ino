@@ -257,7 +257,7 @@ void setup() {
   sliderPixels[4] = 11;
   sliderPixels[5] = 12;
   sliderPixels[6] = 13;
-  slider = new LightGroup(slingRPixels, 7);
+  slider = new LightGroup(sliderPixels, 7);
   handler->registerLightGroup(20, slider);
   slider->setActivePatternData(defaultPattern);
 

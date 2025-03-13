@@ -21,7 +21,7 @@ void MeterPattern::updatePixels(Adafruit_NeoPixel* neoPixel, LightGroup* group) 
     // TODO: only set each pixel once per setting the pattern like with the Off pattern
     uint8_t pixelID = group->getPixelID(i);
 
-    uint32_t color = data.options <= i ? getPixelColor(i) : 0;
+    uint32_t color = data.options >= i ? getPixelColor(i) : 0;
     neoPixel->setPixelColor(pixelID, color);
   }
 }
