@@ -7,10 +7,11 @@
 #include "SimpleOnPattern.h"
 #include "OffPattern.h"
 #include "FlashPattern.h"
+#include "FlashOnPattern.h"
 #include "MeterPattern.h"
 
 #define FRAME_INTERVAL 1000 / 30
-#define TOTAL_PIXELS 28
+#define TOTAL_PIXELS 34
 #define NEOPIXEL_PIN 6
 
 unsigned long lastFrameTime;
@@ -31,6 +32,8 @@ ColorList *specialOnPatVariants;
 
 FlashPattern *flashPat;
 FlashPattern *grbFlashPat;
+FlashOnPattern *flashOnPat;
+FlashOnPattern *specialFlashOnPat;
 
 static uint32_t grbRainbowColors[7];
 MeterPattern *sliderPattern;
@@ -97,6 +100,12 @@ LightGroup *leftWallTarget4;
 static uint8_t sliderPixels[7];
 LightGroup *slider;
 
+static uint8_t freeBallIndicator1Pixels[1];
+LightGroup *freeBallIndicator1;
+
+static uint8_t freeBallIndicator2Pixels[1];
+LightGroup *freeBallIndicator2;
+
 
 void setup() {
   pixel = new Adafruit_NeoPixel(TOTAL_PIXELS, NEOPIXEL_PIN, NEO_GRB + NEO_KHZ800);
@@ -141,6 +150,11 @@ void setup() {
 
   sliderPattern = new MeterPattern(5, grbRainbowColorList);
   handler->registerPattern(5, sliderPattern);
+
+  flashOnPat = new FlashOnPattern(6, 100, onPatVariants);
+  handler->registerPattern(6, flashOnPat);
+  specialFlashOnPat = new FlashOnPattern(7, 100, specialOnPatVariants);
+  handler->registerPattern(7, specialFlashOnPat);
 
   PatternData defaultPattern;
   defaultPattern.patternID = 0;
@@ -260,6 +274,15 @@ void setup() {
   slider = new LightGroup(sliderPixels, 7);
   handler->registerLightGroup(20, slider);
   slider->setActivePatternData(defaultPattern);
+
+  freeBallIndicator1Pixels[0] = 28;
+  freeBallIndicator2Pixels[0] = 33;
+  freeBallIndicator1 = new LightGroup(freeBallIndicator1Pixels, 1);
+  freeBallIndicator1->setActivePatternData(defaultPattern);
+  freeBallIndicator2 = new LightGroup(freeBallIndicator2Pixels, 1);
+  freeBallIndicator2->setActivePatternData(defaultPattern);
+  handler->registerLightGroup(21, freeBallIndicator1);
+  handler->registerLightGroup(22, freeBallIndicator2);
 
   pixel->begin();
   // pixel->clear();

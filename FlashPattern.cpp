@@ -25,6 +25,10 @@ unsigned char FlashPattern::getFlashCount(unsigned char options) {
   return options > 0 ? options : 1;
 }
 
+unsigned char FlashPattern::getMaxInterval(unsigned char options) {
+  return getFlashCount(options) * 2;
+}
+
 unsigned long FlashPattern::getTimestamp(LightGroup* group) {
   unsigned long timestamp = group->getPatternTimestamp(patternID);
 
@@ -43,7 +47,7 @@ void FlashPattern::updatePixels(Adafruit_NeoPixel* neoPixel, LightGroup* group) 
 
   PatternData data = group->getActivePatternData();
 
-  if(intervalCount > getFlashCount(data.options) * 2) {
+  if(intervalCount > getMaxInterval(data.options)) {
     return;
   }
 
