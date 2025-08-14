@@ -29,4 +29,7 @@ void SimpleOnPattern::updatePixels(Adafruit_NeoPixel* neoPixel, LightGroup* grou
     uint8_t pixelID = group->getPixelID(i);
     neoPixel->setPixelColor(pixelID, color);
   }
+
+  data.isPatternComplete = true;
+  group->setActivePatternData(data);
 }

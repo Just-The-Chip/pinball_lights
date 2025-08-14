@@ -24,4 +24,7 @@ void MeterPattern::updatePixels(Adafruit_NeoPixel* neoPixel, LightGroup* group) 
     uint32_t color = data.options >= i ? getPixelColor(i) : 0;
     neoPixel->setPixelColor(pixelID, color);
   }
+
+  data.isPatternComplete = true;
+  group->setActivePatternData(data);
 }

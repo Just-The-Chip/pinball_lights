@@ -48,6 +48,8 @@ void FlashPattern::updatePixels(Adafruit_NeoPixel* neoPixel, LightGroup* group) 
   PatternData data = group->getActivePatternData();
 
   if(intervalCount > getMaxInterval(data.options)) {
+    data.isPatternComplete = true;
+    group->setActivePatternData(data);
     return;
   }
 

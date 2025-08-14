@@ -32,7 +32,7 @@ void Orchestrator::handleMessage(LightMessage message) {
   PatternData current = group->getActivePatternData();
 
   if(current.patternID != message.patternID || current.variantID != message.variantID 
-      || current.options != message.options) {
+      || current.options != message.options || current.isPatternComplete) {
 
     PatternData patternData;
     patternData.patternID = message.patternID;
@@ -62,7 +62,7 @@ void Orchestrator::updateLightGroups(Adafruit_NeoPixel *neoPixel) {
       PatternData patternData = group->getActivePatternData();
       Pattern *pattern = getPattern(patternData.patternID);
 
-      if (pattern != NULL) {
+      if (pattern != NULL && !patternData.isPatternComplete) {
         pattern->updatePixels(neoPixel, group);
       }
     }

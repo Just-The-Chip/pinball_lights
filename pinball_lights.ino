@@ -100,11 +100,14 @@ LightGroup *leftWallTarget4;
 static uint8_t sliderPixels[7];
 LightGroup *slider;
 
-static uint8_t freeBallIndicator1Pixels[1];
-LightGroup *freeBallIndicator1;
+static uint8_t leftDrainLightPixels[1];
+LightGroup *leftDrainLight;
 
-static uint8_t freeBallIndicator2Pixels[1];
-LightGroup *freeBallIndicator2;
+static uint8_t rightDrainLightPixels[1];
+LightGroup *rightDrainLight;
+
+static uint8_t freeBallIndicatorPixels[2];
+LightGroup *freeBallIndicators;
 
 
 void setup() {
@@ -275,14 +278,21 @@ void setup() {
   handler->registerLightGroup(20, slider);
   slider->setActivePatternData(defaultPattern);
 
-  freeBallIndicator1Pixels[0] = 28;
-  freeBallIndicator2Pixels[0] = 33;
-  freeBallIndicator1 = new LightGroup(freeBallIndicator1Pixels, 1);
-  freeBallIndicator1->setActivePatternData(defaultPattern);
-  freeBallIndicator2 = new LightGroup(freeBallIndicator2Pixels, 1);
-  freeBallIndicator2->setActivePatternData(defaultPattern);
-  handler->registerLightGroup(21, freeBallIndicator1);
-  handler->registerLightGroup(22, freeBallIndicator2);
+  leftDrainLightPixels[0] = 28;
+  leftDrainLight = new LightGroup(leftDrainLightPixels, 1);
+  leftDrainLight->setActivePatternData(defaultPattern);
+  handler->registerLightGroup(21, leftDrainLight);
+
+  rightDrainLightPixels[0] = 33;
+  rightDrainLight = new LightGroup(rightDrainLightPixels, 1);
+  rightDrainLight->setActivePatternData(defaultPattern);
+  handler->registerLightGroup(22, rightDrainLight);
+
+  freeBallIndicatorPixels[0] = 28;
+  freeBallIndicatorPixels[1] = 33;
+  freeBallIndicators = new LightGroup(freeBallIndicatorPixels, 2);
+  freeBallIndicators->setActivePatternData(defaultPattern);
+  handler->registerLightGroup(23, freeBallIndicators);
 
   pixel->begin();
   // pixel->clear();
