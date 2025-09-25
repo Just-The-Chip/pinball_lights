@@ -109,6 +109,18 @@ LightGroup *rightDrainLight;
 static uint8_t freeBallIndicatorPixels[2];
 LightGroup *freeBallIndicators;
 
+static uint8_t leftInnerLane2Pixels[1];
+LightGroup *leftInnerLaneLight2;
+
+static uint8_t leftInnerLane1Pixels[1];
+LightGroup *leftInnerLaneLight1;
+
+static uint8_t rightInnerLane1Pixels[1];
+LightGroup *rightInnerLaneLight1;
+
+static uint8_t rightInnerLane2Pixels[1];
+LightGroup *rightInnerLaneLight2;
+
 
 void setup() {
   pixel = new Adafruit_NeoPixel(TOTAL_PIXELS, NEOPIXEL_PIN, NEO_GRB + NEO_KHZ800);
@@ -293,6 +305,26 @@ void setup() {
   freeBallIndicators = new LightGroup(freeBallIndicatorPixels, 2);
   freeBallIndicators->setActivePatternData(defaultPattern);
   handler->registerLightGroup(23, freeBallIndicators);
+
+  leftInnerLane2Pixels[0] = 29;
+  leftInnerLaneLight2 = new LightGroup(leftInnerLane2Pixels, 1);
+  leftInnerLaneLight2->setActivePatternData(defaultPattern);
+  handler->registerLightGroup(24, leftInnerLaneLight2);
+
+  leftInnerLane1Pixels[0] = 30;
+  leftInnerLaneLight1 = new LightGroup(leftInnerLane1Pixels, 1);
+  leftInnerLaneLight1->setActivePatternData(defaultPattern);
+  handler->registerLightGroup(25, leftInnerLaneLight1);
+
+  rightInnerLane1Pixels[0] = 31;
+  rightInnerLaneLight1 = new LightGroup(rightInnerLane1Pixels, 1);
+  rightInnerLaneLight1->setActivePatternData(defaultPattern);
+  handler->registerLightGroup(26, rightInnerLaneLight1);
+
+  rightInnerLane2Pixels[0] = 32;
+  rightInnerLaneLight2 = new LightGroup(rightInnerLane2Pixels, 1);
+  rightInnerLaneLight2->setActivePatternData(defaultPattern);
+  handler->registerLightGroup(27, rightInnerLaneLight2);
 
   pixel->begin();
   // pixel->clear();

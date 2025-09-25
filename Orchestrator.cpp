@@ -38,12 +38,11 @@ void Orchestrator::handleMessage(LightMessage message) {
     patternData.patternID = message.patternID;
     patternData.variantID = message.variantID;
     patternData.options = message.options;
+    // patternData.timestamp = 0;
 
     // if(message.patternID == 0 && message.lightGroupID == 11) {
     //   patternData.logPattern = true;
     // }
- 
-    group->setPatternTimestamp(message.patternID, 0);
 
     group->setActivePatternData(patternData);
 

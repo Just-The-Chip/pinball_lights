@@ -30,11 +30,11 @@ unsigned char FlashPattern::getMaxInterval(unsigned char options) {
 }
 
 unsigned long FlashPattern::getTimestamp(LightGroup* group) {
-  unsigned long timestamp = group->getPatternTimestamp(patternID);
+  unsigned long timestamp = group->getPatternTimestamp();
 
   if(timestamp == 0) {
     unsigned long now = millis();
-    group->setPatternTimestamp(patternID, now);
+    group->setPatternTimestamp(now);
     timestamp = now;
   }
 

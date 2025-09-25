@@ -20,14 +20,11 @@ void PiComm::handleIncomingMessages(Orchestrator *handler) {
       lightMessage.variantID = message[2];
       lightMessage.options = message[3];
 
-      // Serial.print("VARIANT NEAT: ");
-      // Serial.print(lightMessage.variantID);
-
       handler->handleMessage(lightMessage);
     } else {
       Serial.print("BYTES READ: ");
       Serial.print(bytesRead);
-      Serial.println(" INVALID MESSAGE OH NOES!");
+      Serial.println(" INVALID LIGHT MESSAGE OH NOES!");
     }
   }
 }
