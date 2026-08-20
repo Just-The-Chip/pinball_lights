@@ -14,4 +14,5 @@ class PiComm {
 
   protected:
     virtual int available();
+    virtual void flushSerialBuffer(uint8_t flush_until);
 };
